@@ -18,7 +18,7 @@ public class SetRootPane implements Command {
 	public RSBuffer encode(Player player) {
 		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(4));
 
-		buffer.packet(45);
+		buffer.packet(108/*45*/);
 		buffer.writeLEShortA(paneId);
 
 		return buffer;

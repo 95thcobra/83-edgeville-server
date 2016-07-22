@@ -1,7 +1,7 @@
 {
   "username": "test",
   "displayName": "test",
-  "ip": "192.168.43.191",
+  "ip": "127.0.0.1",
   "password": "test",
   "receivedStarter": true,
   "tile": {
@@ -11,9 +11,9 @@
   },
   "playTime": {
     "hours": 9,
-    "minutes": 11,
-    "seconds": 45,
-    "milliseconds": 600,
+    "minutes": 12,
+    "seconds": 6,
+    "milliseconds": 0,
     "color": "\u003ccol\u003dffffff\u003e"
   },
   "privilege": "DEVELOPER",
@@ -596,7 +596,7 @@
     },
     {
       "level": 31,
-      "xp": 1.3034569790000001E7
+      "xp": 1.3034569E7
     },
     {
       "level": 99,

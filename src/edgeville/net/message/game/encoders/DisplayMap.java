@@ -50,7 +50,7 @@ public class DisplayMap implements Command { // Aka dipsleemap
 	public RSBuffer encode(Player player) {
 		RSBuffer buf = new RSBuffer(player.channel().alloc().buffer(12 + 4 * 4 * 9));
 
-		buf.packet(16).writeSize(RSBuffer.SizeType.SHORT);
+		buf.packet(/* 16 */133).writeSize(RSBuffer.SizeType.SHORT);
 
 		/* Calculate map keys needed */
 		List<int[]> keys = new LinkedList<>();
@@ -61,17 +61,18 @@ public class DisplayMap implements Command { // Aka dipsleemap
 			}
 		}
 
+		buf.writeLEShortA(localX);
+
 		for (int[] keyset : keys) {
 			for (int key : keyset) {
-				buf.writeIntV1(key);
+				buf.writeInt(key);
 			}
 		}
 
-		buf.writeShort(z);
-		buf.writeShortA(x);
 		buf.writeLEShort(localZ);
-		buf.writeByteS(level);
-		buf.writeLEShortA(localX);
+		buf.writeByteN(level);
+		buf.writeShortA(x);
+		buf.writeLEShort(z);
 
 		return buf;
 	}

@@ -9,6 +9,7 @@ import edgeville.net.ServerHandler;
 import edgeville.net.message.LoginRequestMessage;
 import edgeville.net.message.game.encoders.Action;
 import edgeville.net.message.game.encoders.DisplayMap;
+import edgeville.net.message.game.encoders.SetRootPane;
 import edgeville.services.Service;
 import edgeville.services.serializers.JSONFileSerializer;
 import edgeville.services.serializers.PlayerSerializer;
@@ -109,29 +110,23 @@ public class LoginService implements Service {
 		// Attach player to session
 		player.channel().attr(ServerHandler.ATTRIB_PLAYER).set(player);
 
-		player.write(new DisplayMap(player)); // This has to be the first
-												// packet!
+		player.write(new DisplayMap(player)); // This has to be the first packet!
 		player.world().syncMap(player, null);
-		player.interfaces().send(); // Must come after to set root pane; else
-									// crash =(
+
+		//player.interfaces().send(); // Must come after to set root pane; else crash =(
+		player.write(new SetRootPane(548));
 		
 		System.out.println(message.channel().remoteAddress());
 
-		//message.channel().
-		
-		//String hostName = ((InetSocketAddress)message.channel()).getHostName();
-		//System.out.println("Hostname: "+hostName);
-		
-		// This isn't really a packet but it's required to be done on the logic
-		// thread
-		player.pendingActions().add(new Action() {
+
+		/*player.pendingActions().add(new Action() {
 			public void decode(RSBuffer buf, ChannelHandlerContext ctx, int opcode, int size) {
 			}
 
 			public void process(Player player) {
 				player.initiate();
 			}
-		});
+		});*/
 	}
 
 }
