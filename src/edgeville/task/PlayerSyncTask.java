@@ -43,7 +43,7 @@ public class PlayerSyncTask implements Task {
 
 		private void sync(Player player) {			
 			RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(512));
-			buffer.packet(79).writeSize(RSBuffer.SizeType.SHORT);
+			buffer.packet(129).writeSize(RSBuffer.SizeType.SHORT);
 
 			buffer.startBitMode();
 			encodeContextPlayer(player, buffer);

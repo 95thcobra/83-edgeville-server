@@ -24,14 +24,15 @@ public class SetVarp implements Command {
 //System.out.println("varp set: id:" + id +" value:"+value + " small:"+small);
 		
 		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(small ? 4 : 7));
-		buffer.packet(small ? 190 : 47);
+		//buffer.packet(small ? 190 : 47);
+		buffer.packet(small ? 56 : 249);
 
 		if (small) {
-			buffer.writeByteS(value);
-			buffer.writeLEShortA(id);
+			buffer.writeLEShort(id);
+			buffer.writeByte(value);
 		} else {
-			buffer.writeLEShortA(id);
-			buffer.writeLEInt(value);
+			buffer.writeIntV1(value);
+			buffer.writeShortA(id);
 		}
 
 		return buffer;

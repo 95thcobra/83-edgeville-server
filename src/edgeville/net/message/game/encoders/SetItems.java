@@ -55,25 +55,25 @@ public class SetItems implements Command {
 	public RSBuffer encode(Player player) {
 		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(8));
 
-		buffer.packet(235).writeSize(RSBuffer.SizeType.SHORT);
+		buffer.packet(33).writeSize(RSBuffer.SizeType.SHORT);
 
-		buffer.writeInt(target == 0 ? -1 : ((target << 16) | targetChild));
-		buffer.writeShort(key);
+		buffer.writeInt(target == 0 ? -1 : ((target << 16) | targetChild)); // target
+		buffer.writeShort(key); // key
 
 		//////////////////// custom by sj
 		if (items != null) {
-			buffer.writeShort(items.size());
+			buffer.writeShort(items.size()); // size
 
 			for (Item item : items) {
 				if (item == null) {
-					buffer.writeShort(0);
-					buffer.writeByte(0);
+					buffer.writeLEShortA(0);
+					buffer.writeByteA(0);
 				} else {
-					buffer.writeShort(item.getId() + 1);
-					buffer.writeByte(Math.min(255, item.getAmount()));
+					buffer.writeLEShortA(item.getId() + 1);
+					buffer.writeByteA(Math.min(255, item.getAmount()));
 
 					if (item.getAmount() >= 255)
-						buffer.writeLEInt(item.getAmount());
+						buffer.writeInt(item.getAmount());
 				}
 			}
 			return buffer;
@@ -84,14 +84,14 @@ public class SetItems implements Command {
 
 		for (Item item : container) {
 			if (item == null) {
-				buffer.writeShort(0);
-				buffer.writeByte(0);
+				buffer.writeLEShortA(0);
+				buffer.writeByteA(0);
 			} else {
-				buffer.writeShort(item.getId() + 1);
-				buffer.writeByte(Math.min(255, item.getAmount()));
+				buffer.writeLEShortA(item.getId() + 1);
+				buffer.writeByteA(Math.min(255, item.getAmount()));
 
 				if (item.getAmount() >= 255)
-					buffer.writeLEInt(item.getAmount());
+					buffer.writeInt(item.getAmount());
 			}
 		}
 

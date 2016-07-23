@@ -42,7 +42,7 @@ public class InvokeScript implements Command {
 
 		RSBuffer buf = new RSBuffer(player.channel().alloc().buffer(size));
 
-		buf.packet(154).writeSize(RSBuffer.SizeType.SHORT);
+		buf.packet(167).writeSize(RSBuffer.SizeType.SHORT);
 
 		////////////////
 		buf.writeString(types);
