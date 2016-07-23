@@ -21,7 +21,7 @@ public class CloseInterface implements Command {
 	@Override
 	public RSBuffer encode(Player player) {
 		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(5));
-		buffer.packet(181);
+		buffer.packet(65);
 		buffer.writeInt(hash);
 		return buffer;
 	}
