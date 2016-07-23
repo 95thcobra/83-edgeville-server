@@ -35,10 +35,10 @@ public class SetMapBase implements Command {
 
 	@Override
 	public RSBuffer encode(Player player) {
-		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(3)).packet(144);
+		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(3)).packet(154);
 
-		buffer.writeByteA(z);
-		buffer.writeByte(x);
+		buffer.writeByteS(z);
+		buffer.writeByteA(x);
 
 		return buffer;
 	}

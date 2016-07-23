@@ -17,11 +17,11 @@ public class SpawnObject implements Command {
 
 	@Override
 	public RSBuffer encode(Player player) {
-		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(5)).packet(63);
+		RSBuffer buffer = new RSBuffer(player.channel().alloc().buffer(5)).packet(215);
 
-		buffer.writeByteA((obj.type() << 2) | obj.rot());
-		buffer.writeByteS(((obj.tile().x & 7) << 4) | (obj.tile().z & 7));
-		buffer.writeShortA(obj.id());
+		buffer.writeShort(obj.id());//id
+		buffer.writeByteS(((obj.tile().x & 7) << 4) | (obj.tile().z & 7));//pos
+		buffer.writeByteA((obj.type() << 2) | obj.rot());//settings
 
 		return buffer;
 	}
